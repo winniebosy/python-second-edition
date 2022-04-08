@@ -1,0 +1,14 @@
+lists in python are always enclosed in []
+Literals: are raw data or data assigned to variables.
+Persistent. Lives in permanent storage.-File
+Ephemeral. Exists temporarily in memory.-variables
+Internal to one specific program.-Variable
+Can be used by more than one program.-File
+Exists in a directory and has a path describing its location.-File
+
+Like Kelly described in the video, here are the main things that the organize_photos.py program will need to do by the time we're done with it:
+
+Get a list of the file names
+Extract the place names from the file names
+Make a directory for each place name
+Move files into the right directories
