@@ -1,0 +1,7 @@
+(unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape [duplicate]
+
+One of often gets the above error from using a normal string as a path in python.
+In order to overcome this error, it is important to put an r before the selected path so that it converts normal string to raw string.
+Example:
+ os.listdir(r"E:\SOFTWARE DEV\UDACITY ITP\Phase 2")
+['.git', 'Card project', 'Elevator Bot', 'HTML-ITP', 'index.txt', 'ipnd-reference-sheet-breakfast-bot-code.pdf', 'ipnd-reference-sheet-elevator-code.pdf', 'Lunch Bot', 'Python', 'python adventure program', 'Python-2']

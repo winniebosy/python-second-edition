@@ -1,0 +1,3 @@
+Allow fetching data from the internet. eg chart services, website srvices such as wikipedia.
+API-Application programing interface
+API means a way of your code to interact with some other code or application.

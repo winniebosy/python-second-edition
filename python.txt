@@ -13,3 +13,254 @@ Extract the place names from the file names
 Make a directory for each place name
 Move files into the right directories
 
+functions for python
+
+Make a new directory - os.mkdir
+
+
+List files in a directory - os.listdir
+
+
+Move a file from one directory to another- os.rename
+
+
+
+The os module provides functions for navigating directories, just like the Bash shell. Here are the main ones you should know:
+os.listdir
+We can use os.listdir to list all the files in a directory:
+>>> import os
+>>> os.listdir()        
+['Photos', 'Other Stuff']
+
+os.mkdir
+We can use os.mkdir to create a new directory. For example:
+>>> os.mkdir("Example")
+
+os.rename
+The os.rename is used to rename or move a file.
+os.rename('python/counting.py', 'Programs/lettercount.py')
+
+
+os.getcwd and os.chdir
+We can use os.getcwd to get the current working directory:
+
+>>> os.getcwd()
+"/Users/kelly"
+And we can use os.chdir to change to a different directory:
+
+>>> os.chdir('Photos')
+
+
+To ensure consistency when exporting portable code in python, it is neccesaary for file paths to be the same across computers.
+Therefore, by using the os.path.join(), you can get file paths depending on the os of the system (that is consistent)
+>>> os.path.join("Documents", "Photos", "Oahu")
+>>> 'Documents/Photos/Oahu' Or backslashes:'Documents\Photos\Oahu' (for windows and macand linux respectively)
+Depending on your operating system, you should get a string with either forward slashes:
+
+
+Example of code to extract part of underscore characters
+>>> filename = "2016-11-04_Berlin_09/42/22.jpg"
+>>> first =filename.find("_")
+>>> print(first)
+10
+>>> partial = filename[first+1:]
+>>> partial
+'Berlin_09/42/22.jpg'
+>>> second = partial.find("_")
+>>> print(second)
+6
+>>> partial[:second]
+'Berlin'
+
+
+
+Example of another fucntion to extract strings
+Either in this workspace or on your own computer, see if you can write a function for extracting the place name.
+
+It should take a file name like "2016-11-04_Berlin_09/42/22.jpg" and return just the place name, 'Berlin'.
+
+def extract_place(filename):
+    first = filename.find("_")
+    partial = filename[first+1:]
+    second = partial.find("_")
+    return partial[:second] 
+
+print(extract_place("2016-11-04_Berlin_09/42/22.jpg"))// Berlin
+print(extract_place("2018-01-03_Oahu_21/51/57.jpg")) // Oahu
+print(extract_place("2018-01_Scottland_11/51/27.jpg")) //Scotland
+
+
+using split: first approach
+def extract_place(filename):
+    parts = filename.split("_") # Get a list containing all the parts
+    place_name = parts[1] # Use the index operator to select the second list item
+    return place_name
+
+    using second approach
+    def extract_place(filename):
+    return filename.split("_")[1]
+
+
+Function to make and place directories
+Your goal is to loop over the file names, extract each place name, and append it to the places list.
+
+    import os
+
+def extract_place(filename):
+    return filename.split("_")[1]
+os.chdir("Photos")
+originals = os.listdir()
+places = []
+for filename in originals:
+    place=extract_place(filename)
+    places.append(place)
+    
+
+
+
+
+final program to organize photo
+
+import os
+
+def extract_place(filename):
+    return filename.split('_')[1]
+#looping to make directories
+def make_place_directories(places): # Here's the function definition
+    for place in places:
+        os.mkdir(place)
+
+os.chdir("Photos")
+originals = os.listdir()
+places = []
+for filename in originals:
+    place = extract_place(filename)
+    if place not in places: # This is the key change. appends place to a list if not in the list.
+        places.append(place)
+
+make_place_directories(places) # Don't forget to call the function!
+print(os.listdir()) # This is just a temporary line for testi
+for filename in originals:
+    place = extract_place(filename)
+    os.rename(filename, os.path.join(place, filename)) // this code allows generation of moving of new files
+
+OK, so we can use os.path.join to generate the new file names.
+
+
+Orgnanizing Photos
+
+
+import os
+
+def make_place_directories(places): # Here's the function definition
+    for place in places:
+        os.mkdir(place)
+
+def extract_place(filename):
+    return filename.split('_')[1]
+
+def organize_photos(directory):
+    os.chdir(directory)
+    originals = os.listdir()
+    places = []
+    for filename in originals:
+        place = extract_place(filename)
+        if place not in places: # This is the key change
+            places.append(place)
+
+    make_place_directories(places)
+
+    for filename in originals:
+        place = extract_place(filename)
+        os.rename(filename, os.path.join(place, filename))
+
+organize_photos("Photos")
+
+
+
+
+
+main uses in PYTHON
+
+Double-underscore ("dunder") variables
+You'll sometimes see variables in Python that have double underscores in the name, such as __name__ and __main__. These are also sometimes called "dunder" variables—with "dunder" being short for "double underscore".
+
+Notice that these names have double underscores at both the beginning and the end. When you see this, it's a signal that it's a special name that is reserved for use by Python. That is, Python is doing some extra magic in the background that it wouldn't normally do with a regular name.
+
+So what's __name__?
+Although you don't always see it in the code, every script has its own copy of the __name__ variable. Before running the code in a program, Python assigns a value to this variable. The value it assigns depends on whether the script is being imported or getting directly executed.
+
+So for example, suppose that you have created a program called my_script.py. One thing you might do is run it directly, such as with this shell command:
+
+python3 my_script.py
+Before executing the code inside my_script.py, Python assigns the value '__main__' to the __name__ variable.
+
+A different possibility is that you just import the code, rather than running it directly. Like we saw above, when a module is imported, all of the code inside of it still gets run. But here's a key difference: When a script is imported, Python sets that script's __name__ variable to the name of the script.
+
+So the key point is:
+
+If we directly run my_script.py, then __name__ gets set to '__main__'.
+If we import my_script,py, then __name__ gets set to 'my_script'.
+
+
+
+
+REMEMBER:  When an import statement is used, __name__ is set equal to the name of the file.
+
+
+
+
+. This is actually a key difference that researchers have found between beginning programmers and expert programmers—experts tend to spend more time planning their approach before they jump into their code editor.
+
+
+
+
+Example of code
+# Create a string with 99 a's and one b.
+# There will always be one b, but it will be at a random position from 0 to 99.
+import random
+letters = ['a'] * 100
+b_location = random.randint(0, 99)
+letters[b_location] = 'b'
+letters = "".join(letters)
+
+# Search for the letter b in the string.
+# How many times will this print "Not yet" ?
+print("Looking for 'b' ...")
+pos = 0
+while letters[pos] != 'b':
+    pos += 1
+    print("Not yet.")
+print(f"Found it! The letter 'b' is at position {pos}." )
+
+
+
+Explanation of each line of code;
+First, we import the random module, which will allow us to generate random numbers, and we generate a list of 100 'a' characters:
+
+import random
+letters = ['a'] * 100
+If we view the contents of letters at this point, we'll see we now have a list of 100 'a' characters:
+
+['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'b', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a']
+
+We want to insert 'b' into this list at a random location. So we pick a location and we replace the character in that location with 'b':
+b_location = random.randint(0, 99)
+letters[b_location] = 'b'
+
+letters = "".join(letters)
+If we view the contents of letters, we now have our string with 'b' at a random location:
+
+'aaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+This is essentially a simpler version of our profanity filter problem:  We have a string of characters and we want to find something in that string.
+
+earching the string
+Now that we have our string, we need to search through it, character by character, until we find b. Our approach here is to use a while loop that checks whether the current character is 'b':
+
+print("Looking for 'b' ...")
+pos = 0 # Start at position 0, the first character in the string
+while letters[pos] != 'b': # If the current character is NOT 'b', enter the loop.
+    pos += 1 # Move on to the next character.
+    print("Not yet.")
+# If we have exited the loop, that means the current character must be 'b'.
+print(f"Found it! The letter 'b' is at position {pos}." )
