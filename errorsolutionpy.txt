@@ -5,3 +5,31 @@ In order to overcome this error, it is important to put an r before the selected
 Example:
  os.listdir(r"E:\SOFTWARE DEV\UDACITY ITP\Phase 2")
 ['.git', 'Card project', 'Elevator Bot', 'HTML-ITP', 'index.txt', 'ipnd-reference-sheet-breakfast-bot-code.pdf', 'ipnd-reference-sheet-elevator-code.pdf', 'Lunch Bot', 'Python', 'python adventure program', 'Python-2']
+
+
+
+lesson outline
+Use Python requests module to send requests to a web API.
+Use Python try and except blocks to handle disruptive events (called exceptions).
+Use a popular data-interchange format called JSON (JavaScript Object Notation) to access data from web APIs.
+Use Python dictionaries to structure data in key-value pairs.
+
+
+
+woeid-where on earth id
+
+
+The unsafe space
+The reason this happens is because the folks who set the standards for URLs decided the space character is "unsafe". Essentially, spaces in URLs can introduce errors and ambiguity, so they're not allowed—and to be helpful, the browser replaces them with a specific code, %20, that is designated for spaces.
+
+If you're curious to learn more, you can check out this Explain Like I'm Five post, or even have a look at the original document where Tim Berners-Lee (the inventor of the World Wide Web!) laid out the standards for URLs:
+
+The space character is unsafe because significant spaces may disappear and insignificant spaces may be introduced when URLs are transcribed or typeset or subjected to the treatment of word-processing programs.
+
+When you enter URLs into your browser, you don't usually need to worry about this, since your browser will automatically replace the spaces with the %20 encoding. However, if you make a request from the shell using curl, it won't do this—so you'll need to actually replace the spaces with %20 yourself.
+
+
+
+
+
+

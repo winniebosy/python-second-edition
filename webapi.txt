@@ -1,3 +1,387 @@
 Allow fetching data from the internet. eg chart services, website srvices such as wikipedia.
 API-Application programing interface
 API means a way of your code to interact with some other code or application.
+-It also service set up in the web such that we can send up requests.
+
+What even is an API?
+The term API is used quite broadly, and if you look it up you'll find a number of different definitions (some of which are rather difficult to understand). But the key underlying idea is in the name—Application Programming Interface. An API is an interface. It's something that has been created to help two different applications interact with one another.
+
+Install requests
+The workspaces in this lesson already have the requests module installed – but if you are also following along on your own machine, then go ahead and install it now. You can use the pip command in the terminal, like Kelly showed in the video:
+pip install requests
+
+Make a Request
+Making a request with Requests is very simple.
+
+Begin by importing the Requests module:
+
+>>> import requests
+Now, let’s try to get a webpage. For this example, let’s get GitHub’s public timeline:
+
+>>> r = requests.get('https://api.github.com/events')
+
+
+
+code that makes a request from a page that doesn't exist ...
+import requests
+r = requests.get('https://www.google.com/monkeybagel/')
+
+if r.status_code == 404:
+    print("Page not found.")
+
+Exceptions: error of a particular type has occured. Specific errors that a program detacts when running code.
+try except statements are used to handle server errors. It will catch an except when the code runs that is inside the code block.
+
+
+
+Another example of using try..except error
+
+try:
+    r = requests.get("https://www.udacity.com")
+except NameError:
+    print("Did you forget to import the requests module?")
+
+try:
+    print(r.text)
+except NameError:
+    print("There seems to be a NameError; r is not defined!")
+
+string = 'short'
+try:
+    for letter in range(6):
+        print(string[letter])
+except IndexError:
+    print("Did you try to index past the end of the string?")
+
+print("Woohoo! You got them all!")
+
+
+
+Second Example using the exceptions connection
+import requests
+
+try:
+    r = requests.get("https://www.udacity.com")
+    print(r) # If you did print(r.status_code), that also works!
+except requests.exceptions.ConnectionError:
+    print("Could not connect to server.")
+
+
+
+JSON- Javascript Object Notation
+Json is a very popular data format for web APIs to use.
+
+
+
+Dictionaries
+contains multiple items.(mixed data)
+-Allows looking up values, modify exisiting ones.
+Example of disctionaries
+d = {}-creates an empty dictionary
+
+
+d["squid"] = "A tentacled mollusk of the briny deep"
+Adds a new entry to the dictionary (or replace the value of an exisitng entry)
+
+d["squid"]
+gets the value that's paired with this key
+
+d["squid"] += " that eats fish, crabs, and wayward elephants."
+modified the value of an existing entry.
+
+
+
+Looping over lists (review)
+We've mentioned that dictionaries are similar to lists. One way in which they are similar is that both data types can be looped over.
+
+Remember, when we say "loop over a list", what we mean is that we use the list in a for loop, like this:
+
+some_list = ["a", "b", "c"]
+for item in some_list:
+    # do something
+The loop will run once for each item in the list. And each time the loop runs, the next item in the list gets assigned to the loop variable.
+
+In this case, the loop variable is called item, and it gets assigned the values "a", "b", and "c", from the list.
+
+Looping over key example
+for key in favorites.keys():
+    print(key)
+
+
+
+Example of code for accessing values 
+favorites = {'color': 'purple', 'number': 42, 'animal': 'turtle', 'language': 'python'}
+
+for value in favorites.values():
+    print(value)
+
+
+
+Looping over dictionaries (3/4)
+So you can loop over a dictionary's keys using keys() and you can loop over a dictionary's values using values(). What if you want to loop over the full entries?
+
+For that, you can use items(). Like this:
+
+for entry in favorites.items():
+   print(entry)
+The output will be:
+
+('color', 'purple')
+('number', 42)
+('animal', 'turtle')
+('language', 'python')
+
+
+Lopping over dictionaries and getting individual entries
+
+favorites = {'color': 'purple', 'number': 42, 'animal': 'turtle', 'language': 'python'}
+for key, value in favorites.items():
+    print(f"My favorite {key} is {value}.")
+
+
+OMy favorite color is purple.
+My favorite number is 42.
+My favorite animal is turtle.
+My favorite language is python.utput:
+
+
+
+
+Example of code to append keys only
+favorites = {
+    'color': 'purple',
+    'number': 42,
+    'animal': 'turtle',
+    'language': 'python'
+}
+
+list = []
+for key in favorites:
+    list.append(key)
+
+print(list)
+Output: ['color', 'number', 'output', 'language']
+Explanation: This code loops over the keys in the dictionary and appends them to the list—and then prints out the list.
+
+
+Counting the number of times a string appears in a sentence
+
+
+
+str = 'it appears that the the appears the most in the sentence'
+dict = {}
+list = str.split(" ")
+for word in list:
+    if word in dict:
+        dict[word] = dict[word] + 1
+    else:
+        dict[word] = 1
+for key, value in dict.items():
+    print(f"\'{key}\' appears {value} time(s) in the string")
+
+
+
+
+s you can see, lists and dictionaries cannot be used as keys in a dictionary. The reason for this is beyond the scope of this course, but it is related to the fact lists and dictionaries are both mutable. For example, if you used a list as a dictionary key and then modified the list, it would be unclear whether you wanted the key to be the old value of the list or the new one!
+The most important thing to notice is that we can use lists and dictionaries as values. That means you can make dictionaries that have lists or other dictionaries inside them!
+
+
+Again, lists and dictionaries cannot be used as keys, but they can be used as values.
+
+d = { : , : , : }- A dictionary
+
+
+l = [ , { : , : }]- A list containing a dictionary
+
+
+d = { : [{ : }, { : }]}- A dictionary containing a list of dictionaries
+
+
+l = [ , , ]- A list
+
+looping through lists.
+foods = [['apple', 'banana', 'orange'],['carrot', 'cucumber', 'tomato']]
+
+# Here's a basic loop that gives one of the above results.
+# Give it a try, and then modify it to see what other
+# results you can get.
+for e in foods:
+    print(e)
+output:
+['apple', 'banana', 'orange']
+['carrot', 'cucumber', 'tomato']
+
+
+foods = [['apple', 'banana', 'orange'],['carrot', 'cucumber', 'tomato']]
+
+# Here's a basic loop that gives one of the above results.
+# Give it a try, and then modify it to see what other
+# results you can get.
+for e in foods[0]:
+    print(e)
+output:
+
+
+
+Looping and using interpolation* in python
+
+
+weather = [
+    {
+        'date':'today',
+        'state': 'cloudy',
+        'temp': 68.5
+    },
+    {
+        'date':'tomorrow',
+        'state': 'sunny',
+        'temp': 74.8
+    }
+]
+
+
+
+for forecast in weather:
+    date = forecast['date']
+    state = forecast['state']
+    temp = forecast['temp']
+    print(f"The weather for {date} will be {state} with a temperature of {temp} degrees.")
+
+
+    output: The weather for today will be cloudy with a temperature of 68.5 degrees.
+            The weather for tomorrow will be sunny with a temperature of 74.8 degrees.      
+
+
+
+To be able to use the weather data, we need to change it from JSON text into a Python dictionary. The structure that JSON uses already looks a lot like a Python dictionary. All we need to do is call the json method on the response object, and store the results in a new variable.
+
+Go ahead and add this to your code:
+
+d = r.json()
+
+
+
+
+Remember, the square brackets enclosing this data tell us it's a list (specifically, a list of dictionaries). So if we want to get just the forecast for a specific day, we can take our current line of code:
+
+d['consolidated_weather']
+And add another index operator to the end, saying which list item we want:
+
+d['consolidated_weather'][0]
+This will give us the first item in the list (the one at index 0). That's a single dictionary for one day's weather forecast:
+
+{
+    'id': 5756340131594240,
+    'weather_state_name': 'Heavy Cloud',
+    'weather_state_abbr': 'hc',
+    'wind_direction_compass': 'W',
+    'created': '2018-09-03T13:19:47.023710Z',
+    'applicable_date': '2018-09-03',
+    'min_temp': 13.7975,
+    'max_temp': 22.1725,
+    'the_temp': 14.47,
+    'wind_speed': 4.825861634719902,
+    'wind_direction': 269.0843199650456,
+    'air_pressure': 986.85,
+    'humidity': 77,
+    'visibility': 9.997862483098704,
+    'predictability': 71
+}
+And then if we want to access one of the entries in that dictionary, we just need to use the key for that entry. Like if we wanted the air pressure for this day:
+
+d['consolidated_weather'][0]['air_pressure']
+In this example, that will give us:
+
+986.85
+This may seem complex, but all we are doing here is chaining index operators together, ['consolidated_weather'][0]['air_pressure'], to burrow down into the nested structure of the data.
+
+
+
+Example of code on how to print out humidity and data for the next six days example.
+
+import requests
+
+r = requests.get('https://www.metaweather.com/api/location/2455920')
+d = r.json()
+
+for forecast in d['consolidated_weather']:
+    date = forecast['applicable_date']
+    humidity = forecast['humidity']
+    print(f"{date}\tHumidity: {humidity}")
+
+
+    Quiz:
+    That's right! The requests.get method returns a response object. This code will make a web request to Yahoo! and print out the HTML and JavaScript that it gets back.
+
+
+
+
+ What is the output of this code:   
+roman = {'i': 1, 'v': 5, 'x': 10}
+roman['m'] = 1000
+letters = list(roman.keys())
+letters.sort()
+print(" ".join(letters))// i m v x
+
+
+Example 2
+
+>>> my_list = [1, 2, 3]
+>>> my_list[0] = "foo"
+>>> my_list // output  is "foo, 2,3. This is because lists are mutable. Can be changed.
+
+Example 3
+
+>>> my_tuple = (1, 2, 3)
+>>> my_tuple[0] = "foo"  results to type error because numbers are immutable.
+
+
+
+Example of getting woeid weather data from user:
+#!/usr/bin/env python3
+
+import requests
+
+API_ROOT = 'https://www.metaweather.com'
+API_LOCATION = '/api/location/search/?query='
+API_WEATHER = '/api/location/'  # + woeid
+
+def fetch_location(query):
+    return requests.get(API_ROOT + API_LOCATION + query).json()
+
+def fetch_weather(woeid):
+    return requests.get(API_ROOT + API_WEATHER + str(woeid)).json()
+
+def disambiguate_locations(locations):
+    print("Ambiguous location! Did you mean:")
+    for loc in locations:
+        print(f"\t* {loc['title']}")
+
+def display_weather(weather):
+    print(f"Weather for {weather['title']}:")
+    for entry in weather['consolidated_weather']:
+        date = entry['applicable_date']
+        high = entry['max_temp']
+        low = entry['min_temp']
+        state = entry['weather_state_name']
+        print(f"{date}\t{state}\thigh {high:2.1f}°C\tlow {low:2.1f}°C")
+
+def weather_dialog():
+    try:
+        where = ''
+        while not where:
+            where = input("Where in the world are you? ")
+        locations = fetch_location(where)
+        if len(locations) == 0:
+            print("I don't know where that is.")
+        elif len(locations) > 1:
+            disambiguate_locations(locations)
+        else:
+            woeid = locations[0]['woeid']
+            display_weather(fetch_weather(woeid))
+    except requests.exceptions.ConnectionError:
+        print("Couldn't connect to server! Is the network up?")
+
+if __name__ == '__main__':
+    while True:
+        weather_dialog()
